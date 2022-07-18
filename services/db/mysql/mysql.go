@@ -11,8 +11,6 @@ import (
 )
 
 var db *gorm.DB
-var err error
-var e error
 
 func Init() {
 	c := config.GetConfig()

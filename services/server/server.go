@@ -1,9 +1,15 @@
 package server
 
-import "sja-boiler-plate/config"
+import (
+	"log"
+	"sja-boiler-plate/config"
+)
 
 func Init() {
 	c := config.GetConfig()
 	r := NewRouter()
-	r.Run(c.GetString("server.port"))
+	err := r.Run(c.GetString("server.port"))
+	if err != nil {
+		log.Fatalln("server not started reason: ", err)
+	}
 }
