@@ -11,9 +11,11 @@ func NewRouter() *gin.Engine {
 	router := gin.New()
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
-	router.Use(middlewares.CORS())
+	router.Use(middlewares.CORSMiddleware())
+	router.Use(middlewares.ErrorHandler())
 	public.PublicRoutes(router)
-	protected.ProtectedRoutes(router)
+	authorized := router.Group("/")
+	protected.ProtectedRoutes(authorized)
 
 	return router
 }
